@@ -1,7 +1,7 @@
 # swiper-migemo
 Use ivy/counsel/swiper with migemo.
 
-## Commentary
+## Motivation
 In the past, many people used avy-migemo to support migemo in swiper, ivy and
 counsel. However, avy-migemo has not been maintained for a long time, and
 many attempts have been made to achieve migemo support without using
