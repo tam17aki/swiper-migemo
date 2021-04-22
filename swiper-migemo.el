@@ -91,23 +91,29 @@
   :type 'list
   :group 'swiper-migemo)
 
-(defun swiper-migemo-get-pattern-shyly (word)
+(defun swiper-migemo--get-pattern-shyly (word)
+  "Convert the group of regexp string into the Shy group.
+WORD is retured from `ivy-split'."
   (replace-regexp-in-string
    "\\\\("
    "\\\\(?:"
    (migemo-get-pattern word)))
 
 (defun swiper-migemo--regex-migemo-pattern (word)
+  "Get regexp string for migemo from WORD."
   (cond
-   ((string-match "\\(.*\\)\\(\\[[^\0]+\\]\\)"  word)
-    (concat (swiper-migemo-get-pattern-shyly (match-string 1 word))
+   ((string-match "\\(.*\\)\\(\\[[^\0]+\\]\\)"  word) ; [ ... ]
+    (concat (swiper-migemo--get-pattern-shyly (match-string 1 word))
             (match-string 2 word)))
-   ((string-match "\\`\\\\([^\0]*\\\\)\\'" word)
+   ((string-match "\\`\\\\([^\0]*\\\\)\\'" word) ; group
     (match-string 0 word))
-   (t
-    (swiper-migemo-get-pattern-shyly word))))
+   (t ; otherwise
+    (swiper-migemo--get-pattern-shyly word))))
 
 (defun swiper-migemo--regex-migemo (str)
+  "Customized version of `ivy--regex'.
+The input STR is converted into the corresponding regexp string through
+`swiper-migemo--regex-migemo-pattern'."
   (when (string-match-p "\\(?:[^\\]\\|^\\)\\\\\\'" str)
     (setq str (substring str 0 -1)))
   (setq str (ivy--trim-trailing-re str))
@@ -134,11 +140,20 @@
              nil t))))))
 
 (defun swiper-migemo--regex-migemo-plus (str)
+  "Invoke `ivy--regex-plus' with STR.
+Internally, `swiper-migemo--regex-migemo' is used intead of `ivy--regex'."
   (cl-letf (((symbol-function 'ivy--regex) #'swiper-migemo--regex-migemo))
     (ivy--regex-plus str)))
 
-(defvar swiper-migemo--search-default-mode-backup nil)
-(defvar swiper-migemo--ivy-re-builders-alist-backup nil)
+(defvar swiper-migemo--search-default-mode-backup nil
+  "A variable for backup of `search-default-mode'.
+The value of `search-default-mode' is recovered when `swiper-migemo' is
+deactivated.")
+
+(defvar swiper-migemo--ivy-re-builders-alist-backup nil
+  "A variable for backup of `ivy-re-builders-alist'.
+The value of `ivy-re-builders-alist' is recovered when `swiper-migemo' is
+deactivated.")
 
 ;;;###autoload
 (define-minor-mode swiper-migemo-mode
@@ -169,6 +184,7 @@
     (setq search-default-mode swiper-migemo--search-default-mode-backup)))
 
 (defun swiper-migemo--turn-on ()
+  "Funcion for turning on the minor-mode."
   (swiper-migemo-mode +1))
 
 ;;;###autoload
