@@ -165,11 +165,11 @@ deactivated.")
   (if swiper-migemo-mode
       (progn
         ;; enable
-        (if (eq swiper-migemo--ivy-re-builders-alist-backup nil)
+        (if (not swiper-migemo--ivy-re-builders-alist-backup)
             (setq swiper-migemo--ivy-re-builders-alist-backup
                   (copy-alist ivy-re-builders-alist)))
-        (if (and (eq swiper-migemo--search-default-mode-backup nil)
-                 (not (eq search-default-mode nil)))
+        (if (and (not swiper-migemo--search-default-mode-backup)
+                 search-default-mode)
             (setq swiper-migemo--search-default-mode-backup
                   search-default-mode))
         (mapc (lambda (command)
