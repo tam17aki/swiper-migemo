@@ -26,6 +26,7 @@ In this case,  the minor-mode will be activated in buffer-local and never use `g
 ## Customization
 You can customize `swiper-migemo-enable-command` which is a list of commands
 to use migemo-mode.
+
 For example, If you want to use `counsel-recentf` with migemo, add following code in the
 init file:
 
@@ -43,7 +44,7 @@ in the init file:
 (migemo-init)
 ```
 
-Note: The above settings must be evaluated before the activataion of this
+Note: the above settings must be evaluated before the activataion of this
 minor-mode. That is,
 
 ```el
