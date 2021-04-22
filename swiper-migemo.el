@@ -1,4 +1,4 @@
-;;; swiper-migemo.el --- Use ivy/counsel/swiper with migemo. -*- lexical-binding: t -*-
+;;; swiper-migemo.el --- Use ivy/counsel/swiper with migemo -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2021 Akira TAMAMORI
 
