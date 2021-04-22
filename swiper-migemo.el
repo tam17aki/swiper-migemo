@@ -2,6 +2,12 @@
 
 ;; Copyright (C) 2021 Akira TAMAMORI
 
+;; Author: Akira Tamamori
+;; URL: https://github.com/tam17aki/swiper-migemo
+;; Version: 1.0
+;; Created: Apr 22 2021
+;; Package-Requires: ((emacs "27.1") (ivy "0.13.4") (migemo "1.9.2"))
+
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
 ;; the Free Software Foundation, either version 3 of the License, or
@@ -30,7 +36,8 @@
 ;; (require 'swiper-migemo)
 ;; (global-swiper-migemo-mode +1)
 ;;
-;; You can customize swiper-migemo-enable-command which is a list of commands
+;; In default setting, you can use `swiper' and `swiper-isearch' with migemo.
+;; You can also customize swiper-migemo-enable-command which is a list of commands
 ;; to use migemo-mode.
 ;;
 ;; For example, If you want to add `counsel-recentf', add following code in the
@@ -64,6 +71,7 @@
 ;;; Code:
 
 (require 'ivy)
+(require 'swiper)
 (require 'migemo)
 
 (defgroup swiper-migemo nil
