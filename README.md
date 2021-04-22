@@ -20,7 +20,7 @@ In default setting, you can use `swiper` and `swiper-isearch` with migemo.
 
 You can customize `swiper-migemo-enable-command` which is a list of commands
 to use migemo-mode.
-For example, If you want to add `counsel-recentf`, add following code in the
+For example, If you want to use `counsel-recentf` with migemo, add following code in the
 init file:
 
 ```el
